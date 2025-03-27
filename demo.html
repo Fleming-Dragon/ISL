@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Language Translator Demo</title>
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="aperture.svg" alt="Sign Language Translator Logo" class="logo-img">
+                <span>SignTranslate</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="features.html">Features</a>
+                <a href="how-it-works.html">How It Works</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="demo.html" class="nav-cta">Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Demo Section -->
+    <section class="demo" id="demo">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge">Demo</span>
+                <h2>Try the Sign Language Translator</h2>
+                <p>Experience real-time recognition and translation of Indian Sign Language gestures.</p>
+            </div>
+
+            <div class="demo-container">
+                <div class="camera-feed">
+                    <h3>Camera Feed</h3>
+                    <video id="camera" autoplay playsinline></video>
+                    <button id="startCamera" class="primary-btn">
+                        <i class="fas fa-video"></i> Start Camera
+                    </button>
+                </div>
+
+                <div class="translation-output">
+                    <h3>Translation Output</h3>
+                    <div id="output" class="output-box">
+                        <p>Translation will appear here...</p>
+                    </div>
+                    <button id="speakOutput" class="secondary-btn">
+                        <i class="fas fa-volume-up"></i> Speak Output
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="aperture.svg" alt="Sign Language Translator Logo" class="logo-img">
+                    <span>SignTranslate</span>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#">Features</a>
+                        <a href="#">How It Works</a>
+                        <a href="#">Roadmap</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#">Documentation</a>
+                        <a href="#">API</a>
+                        <a href="#">Support</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sign Language Translator MVP. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // JavaScript for demo functionality
+        const camera = document.getElementById('camera');
+        const startCamera = document.getElementById('startCamera');
+        const output = document.getElementById('output');
+        const speakOutput = document.getElementById('speakOutput');
+
+        // Start camera feed
+        startCamera.addEventListener('click', async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                camera.srcObject = stream;
+            } catch (error) {
+                alert('Unable to access the camera. Please check your permissions.');
+            }
+        });
+
+        // Speak the output
+        speakOutput.addEventListener('click', () => {
+            const text = output.textContent || 'Translation will appear here...';
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US'; // Set language
+            window.speechSynthesis.speak(speech);
+        });
+    </script>
+</body>
+
+</html>
